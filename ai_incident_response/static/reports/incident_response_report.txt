@@ -1,0 +1,85 @@
+**Incident Report**
+================
+
+**Executive Summary**
+-------------------
+
+On January 24, 2026, at 17:48:07, a slow port scan was detected from IP address 45.33.32.156. The scan targeted multiple ports, including port 21, 22, 23, 25, and 80, and was blocked by the firewall. This incident falls under the "Discovery" tactic and "Network Service Scanning" technique, with a severity score of 20, classified as low severity.
+
+**Incident Details**
+-------------------
+
+* **Date/Time:** January 24, 2026, 17:48:07
+* **Type/Severity:** Slow port scan, Low Severity (Severity Score: 20)
+* **Affected Systems/Data:** Multiple ports (21, 22, 23, 25, 80)
+* **Reporter:** [Your Name]
+
+**Incident Timeline (Technical)**
+-------------------------------
+
+### Compromise
+
+* 17:48:07 - Slow port scan detected from IP address 45.33.32.156
+* 17:48:07 - Firewall blocked the scan
+
+### Lateral Movement
+
+* None
+
+### Data Access
+
+* None
+
+### Containment
+
+* Firewall blocked the scan
+
+### Eradication
+
+* None
+
+### Recovery
+
+* None
+
+**Detection & Analysis**
+----------------------
+
+* **Detection Method:** Firewall logs
+* **Evidence:** Firewall logs showing blocked scans
+* **Indicators of Compromise (IoCs):** IP address 45.33.32.156, scan type: slow port scan
+* **Root Cause Analysis:** The incident was caused by a slow port scan from an unknown IP address.
+
+**Response Actions**
+-------------------
+
+* **Block the IP address:** Block the IP address '45.33.32.156' in the firewall to prevent further scanning activity.
+* **Verify firewall rules:** Verify that the firewall rules are correctly configured to block the identified sensitive ports (22, 3306, 6379, 3389, 5432) and that the rules are up-to-date.
+* **Monitor for similar activity:** Continuously monitor the network for similar slow port scan activity and adjust the firewall rules as necessary.
+* **Update the incident response plan:** Update the incident response plan to include procedures for handling slow port scan incidents, including the steps outlined above.
+* **Conduct a vulnerability assessment:** Conduct a vulnerability assessment to identify any potential vulnerabilities that may have been exploited by the attacker.
+* **Implement additional security measures:** Implement additional security measures, such as intrusion detection and prevention systems (IDPS), to detect and prevent similar incidents in the future.
+* **Document the incident:** Document the incident, including the incident details, response actions, and lessons learned, to improve incident response procedures and prevent similar incidents.
+
+**Impact Assessment**
+-------------------
+
+* **Actual or Potential Damages:** None
+* **Injuries or Business Disruption:** None
+
+**Lessons Learned & Recommendations**
+-----------------------------------
+
+* **Specific, Actionable Steps:** Implement rate limiting on the firewall to limit the number of connections from a single IP address within a given time window.
+* **Use a web application firewall (WAF):** Use a WAF to detect and prevent malicious traffic, including slow port scans.
+* **Conduct a security information and event management (SIEM) analysis:** Conduct a SIEM analysis to identify any potential security threats and improve incident response procedures.
+* **Implement a security orchestration, automation, and response (SOAR) tool:** Implement a SOAR tool to automate incident response procedures and improve response times.
+* **Provide user education:** Provide user education on the risks associated with slow port scans and the importance of reporting suspicious activity.
+
+**Appendices**
+--------------
+
+* **Raw Logs:** Firewall logs showing blocked scans
+* **Screenshots:** None
+* **Witness Statements:** None
+* **Network Diagrams:** None
