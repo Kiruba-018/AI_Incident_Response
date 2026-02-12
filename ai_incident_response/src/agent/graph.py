@@ -86,7 +86,6 @@ async def main():
     await compiled_graph.ainvoke(State(), {"recursion_limit": int(os.getenv("RECURSION_LIMIT", 50))})
 
 
-
-
-if __name__ == "__main__":
+def run_graph():
+    """Helper function to run the graph."""
     asyncio.run(main())
