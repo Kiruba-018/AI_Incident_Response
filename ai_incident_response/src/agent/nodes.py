@@ -336,47 +336,70 @@ def calculate_confidence(windows, syn, fin, sensitive):
     return confidence
     
 
+
 async def map_policy(state):
-    """Map relevant SOC policies to the incident using RAG and LLM."""
-    incident_details = state.incident_details
-    if incident_details is None:
+    state.current_step = "map_policy"
+
+    incident = state.incident_details
+    if incident is None:
         return state
 
-
-    #-- retrieving the relevant policies --
-    query = f"Provide SOC policies related to {incident_details.incident_type} with severity {incident_details.severity_level}."
+    query = """
+    SOC policies for handling slow port scanning incidents.
+    Include response procedures for Low, Medium, High, and Critical severity levels.
+    """
 
     related_policies = await retrieve_soc_policy(query)
 
-    #-- ingest policy to llm 
+    ip_data = []
+
+    for ip, finding in incident.ip_findings.items():
+        ip_data.append({
+            "ip_address": ip,
+            "severity_level": finding.severity_level,
+            "severity_score": finding.severity_score,
+            "confidence_score": finding.confidence_score
+        })
 
     prompt = f"""
-                You are a senior SOC analyst.
+You are a senior SOC analyst.
 
-                Below are internal SOC policy excerpts retrieved from the policy database.
+POLICY EXCERPTS:
+{related_policies}
 
-                POLICY EXCERPTS:
-                {related_policies}
+Below are detected IP findings:
 
-                INCIDENT DETAILS:
-                - Type: {incident_details.incident_type}
-                - Severity: {incident_details.severity_level}
-                - Severity Score: {incident_details.severity_score}
-                - Time: {incident_details.time_of_incident}
+{ip_data}
 
-                TASK:
-                1. Identify which policy sections apply to this incident.
-                2. Briefly explain why each policy is relevant.
-                3. Do NOT invent policies. Use only the provided excerpts.
+TASK:
+For EACH IP:
+1. Identify which policy sections apply.
+2. Briefly explain why they apply.
+3. Do NOT invent policies.
+4. Use only the provided excerpts.
 
-                Return the result as a bulleted list.
-                """
+Return output STRICTLY in JSON format as:
+
+{{
+  "ip_address": {{
+      "policy_mapping": "text explanation here"
+  }}
+}}
+"""
 
     response = await invoke_llm(prompt)
 
-    state.incident_details.policy_mapping = response
-    
+    try:
+        response = response.strip().strip("```json").strip("```")
+        parsed = json.loads(response)
+    except Exception:
+        return state
+
+    for ip, content in parsed.items():
+        state.incident_details.policy_mapping[ip] = content.get("policy_mapping")
+
     return state
+
 
 
 

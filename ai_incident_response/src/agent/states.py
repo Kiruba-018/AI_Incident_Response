@@ -27,7 +27,7 @@ class Incident_Details(BaseModel):
 
     summary: str = ""
     recommended_actions: List[str] = Field(default_factory=list)
-    policy_mapping: str = ""
+    policy_mapping: Dict[str,Dict] = Field(default_factory=dict)
     report_text: str = ""
     
 
