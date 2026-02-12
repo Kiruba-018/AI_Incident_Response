@@ -413,7 +413,6 @@ async def summarize_incident(state):
             INCIDENT DETAILS:
             - Type: {state.incident_details.incident_type}
             - IP Findings: {state.incident_details.ip_findings}
-            - Evidence: {state.incident_details.evidence}
             - Time: {state.incident_details.time_of_incident}
             - Policy Mapping: {state.incident_details.policy_mapping}
 
@@ -564,7 +563,6 @@ def record_incident(state):
         "time_of_incident": incident.time_of_incident,
         "summary": incident.summary,
         "recommended_actions": incident.recommended_actions,
-        "evidence": incident.evidence,
         "report_text": incident.report_text
     
     }
