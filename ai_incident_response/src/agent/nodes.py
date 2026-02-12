@@ -304,39 +304,37 @@ def set_severity(state):
 
         score = min(score, 100)
 
-        if score > max_severity_score:
-            max_severity_score = score
+        # Determine severity level
+        if score >= 75:
+            final_severity_level = "Critical"
+        elif score >= 50:
+            final_severity_level = "High"
+        elif score >= 25:
+            final_severity_level = "Medium"
 
-    # Determine severity level
-    if max_severity_score >= 75:
-        final_severity_level = "Critical"
-    elif max_severity_score >= 50:
-        final_severity_level = "High"
-    elif max_severity_score >= 25:
-        final_severity_level = "Medium"
+        confidence_score = calculate_confidence(windows, syn, fin, sensitive)
 
-   
-    state.incident_details.incident_type = "Slow port scan detected"
-    state.incident_details.severity_score = max_severity_score
-    state.incident_details.severity_level = final_severity_level
-    state.incident_details.time_of_incident = datetime.now().isoformat()
-    
+        # Update individual IP findings
+        if state.incident_details and ip in state.incident_details.ip_findings:
+            state.incident_details.ip_findings[ip].severity_score = score
+            state.incident_details.ip_findings[ip].severity_level = final_severity_level
+            state.incident_details.ip_findings[ip].confidence_score = confidence_score
+        
     return state
 
 
-def calculate_confidence(state):
+
+def calculate_confidence(windows, syn, fin, sensitive):
     """ Calculate confidence score for the incident classification based on evidence and severity."""
 
-    state.current_step = "calculate_confidence"
+    confidence = min(
+    (windows * 0.2) +
+    ((syn + fin) * 0.05) +
+    (0.1 if sensitive > 0 else 0),
+    1.0)
 
-    if state.incident_details is None:
-        return state
+    return confidence
     
-    score = 0.0
-    
-
-
-
 
 async def map_policy(state):
     """Map relevant SOC policies to the incident using RAG and LLM."""
