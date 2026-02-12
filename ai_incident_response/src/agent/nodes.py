@@ -412,8 +412,7 @@ async def summarize_incident(state):
 
             INCIDENT DETAILS:
             - Type: {state.incident_details.incident_type}
-            - Severity: {state.incident_details.severity_level}
-            - Severity Score: {state.incident_details.severity_score}
+            - IP Findings: {state.incident_details.ip_findings}
             - Evidence: {state.incident_details.evidence}
             - Time: {state.incident_details.time_of_incident}
             - Policy Mapping: {state.incident_details.policy_mapping}
@@ -437,9 +436,7 @@ async def recommend_actions(state):
 
             INCIDENT DETAILS:
             - Type: {state.incident_details.incident_type}
-            - Severity: {state.incident_details.severity_level}
-            - Severity Score: {state.incident_details.severity_score}
-            - Evidence: {state.incident_details.evidence}
+            - IP Findings: {state.incident_details.ip_findings}
             - Time: {state.incident_details.time_of_incident}
             - Policy Mapping: {state.incident_details.policy_mapping}
 
@@ -483,12 +480,10 @@ async def generate_report(state):
     "Visuals: Timelines and attack maps (MITRE ATT&CK) enhance understanding. Example Incident Types Covered Cyberattacks (malware, phishing, DDoS) Workplace Accidents/Injuries Data Breaches System Outages/Failures"
     "details of incindent: "
     f"incident type: {incident.incident_type}\n"
-    f"severity level: {incident.severity_level}\n"
-    f"severity score: {incident.severity_score}\n"
+    f"ip findings: {incident.ip_findings}\n"
     f"time of incident: {incident.time_of_incident}\n"
     f"summary: {incident.summary}\n"
     f"recommended actions: {incident.recommended_actions}\n"
-    f"evidence: {incident.evidence}\n"
     f"policy mapping: {incident.policy_mapping}\n"
     "Return the report as .md format with appropriate headings and subheadings.")
 
@@ -515,8 +510,7 @@ async def draft_email(state):
 
             Incident Details:
             - Type: {state.incident_details.incident_type}
-            - Severity: {state.incident_details.severity_level}
-            - Severity Score: {state.incident_details.severity_score}
+            - Ip Findings: {state.incident_details.ip_findings}
             - Time: {state.incident_details.time_of_incident}
             - Summary: {state.incident_details.summary}
             - Recommended Actions: {state.incident_details.recommended_actions}
@@ -558,14 +552,21 @@ def record_incident(state):
     incident_record = {
         "id": incident_id,
         "type": incident.incident_type,
-        "severity_level": incident.severity_level,
-        "severity_score": incident.severity_score,
-        "src_ip": incident.evidence[0].get("src_ip", "") if incident.evidence else "",
+        "ip_findings": {
+            ip: {
+                "severity_level": finding.severity_level,   
+                "severity_score": finding.severity_score,
+                "confidence_score": finding.confidence_score,
+                "evidence_list": finding.evidence_list
+            } 
+            for ip, finding in incident.ip_findings.items()
+        },
         "time_of_incident": incident.time_of_incident,
         "summary": incident.summary,
         "recommended_actions": incident.recommended_actions,
         "evidence": incident.evidence,
         "report_text": incident.report_text
+    
     }
 
     incidents.append(incident_record)
