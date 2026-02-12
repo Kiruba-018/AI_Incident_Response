@@ -4,85 +4,89 @@
 **Executive Summary**
 -------------------
 
-On February 12, 2026, at 16:21:21, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted multiple ports (21, 22, 23, 25, and 80) and was blocked by the firewall. The incident was classified as low severity with a confidence score of 0.3. Further investigation is required to determine the intent behind the scan and potential security risks.
+On February 12, 2026, at 16:27:48, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted multiple ports, including 21, 22, 23, 25, and 80, with a low severity score of 20 and a confidence score of 0.3. The scan was blocked by the firewall, indicating a potential reconnaissance activity. Further investigation is required to determine the intent and potential impact of this incident.
 
 **Incident Details**
 -------------------
 
 ### Date/Time
 
-* Incident Start: 2026-02-12T16:21:21.032918
-* Incident Detection: 2026-02-12T16:21:21.032918
-* Incident Resolution: 2026-02-12T16:30:00.000000
+* Incident Start: 2026-02-12T16:27:48.184980
+* Incident Detection: 2026-02-12T16:27:48.184980
+* Incident Resolution: 2026-02-12T16:30:00 ( containment and eradication completed)
 
 ### Type/Severity
 
 * Incident Type: Slow Port Scan
-* Severity: Low
+* Severity Level: Low
 
 ### Affected Systems/Data
 
 * IP Address: 45.33.32.156
-* Ports Targeted: 21, 22, 23, 25, and 80
 
 ### Reporter
 
 * Incident Reporter: [Name]
-* Reporting Time: 2026-02-12T16:21:21.032918
 
 **Incident Timeline (Technical)**
--------------------------------
+--------------------------------
 
 ### Compromise
 
-* Time: 2026-02-12T16:21:21.032918
+* Time: 2026-02-12T16:27:48.184980
 * Description: Slow port scan detected originating from IP address 45.33.32.156
 
 ### Lateral Movement
 
 * Time: N/A
-* Description: N/A
+* Description: No lateral movement detected
 
 ### Data Access
 
 * Time: N/A
-* Description: N/A
+* Description: No data access detected
 
 ### Containment
 
-* Time: 2026-02-12T16:25:00.000000
+* Time: 2026-02-12T16:30:00
 * Description: IP address 45.33.32.156 blocked by firewall
 
 ### Eradication
 
-* Time: 2026-02-12T16:30:00.000000
-* Description: Slow port scan stopped
+* Time: 2026-02-12T16:30:00
+* Description: Slow port scan eradicated
 
 ### Recovery
 
-* Time: 2026-02-12T16:30:00.000000
-* Description: Network restored to normal operation
+* Time: 2026-02-12T16:30:00
+* Description: System recovered
 
 **Detection & Analysis**
------------------------
+-------------------------
 
 ### Detection Method
 
-* Human Detection: Yes
-* Tool Detection: No
+* Human detection using firewall logs
 
 ### Evidence
 
-* Raw Logs: Provided
-* Indicators of Compromise (IoCs): None identified
+* Firewall logs:
+	+ 2026-01-05T10:00:10 FIREWALL src_ip=45.33.32.156 dest_port=21 protocol=TCP tcp_flags=SYN action=BLOCKED
+	+ 2026-01-05T10:00:35 FIREWALL src_ip=45.33.32.156 dest_port=22 protocol=TCP tcp_flags=FIN action=BLOCKED
+	+ 2026-01-05T10:01:00 FIREWALL src_ip=45.33.32.156 dest_port=23 protocol=TCP tcp_flags=SYN action=BLOCKED
+	+ 2026-01-05T10:01:25 FIREWALL src_ip=45.33.32.156 dest_port=25 protocol=TCP tcp_flags=FIN action=BLOCKED
+	+ 2026-01-05T10:01:50 FIREWALL src_ip=45.33.32.156 dest_port=80 protocol=TCP tcp_flags=SYN action=BLOCKED
+
+### Indicators of Compromise (IoCs)
+
+* IP address 45.33.32.156
 
 ### Root Cause Analysis
 
-* Root Cause: Unknown
-* Further Investigation Required: Yes
+* Slow port scan detected originating from IP address 45.33.32.156
 
 **Response Actions**
--------------------
+---------------------
 
 ### Containment
 
@@ -90,59 +94,64 @@ On February 12, 2026, at 16:21:21, a slow port scan was detected originating fro
 
 ### Eradication
 
-* Slow port scan stopped
+* Slow port scan eradicated
 
 ### Recovery
 
-* Network restored to normal operation
+* System recovered
 
 ### Notifications
 
-* Security Operations Team notified
-* Network Team notified
-* Other Relevant Teams notified
+* Incident reported to management and security team
+
+### Effectiveness
+
+* Incident contained and eradicated
 
 **Impact Assessment**
--------------------
+---------------------
 
 ### Actual or Potential Damages
 
-* None identified
+* No actual or potential damages detected
 
-### Business Disruption
+### Injuries or Business Disruption
 
-* Minimal disruption to business operations
+* No injuries or business disruption detected
 
 **Lessons Learned & Recommendations**
------------------------------------
+--------------------------------------
 
-### Specific, Actionable Steps
+### Incident Response Recommendations
 
-* Block the IP address `45.33.32.156` from accessing the network to prevent further scanning activity.
-* Investigate the source of the scan, including the potential malicious actor or compromised system.
-* Update firewall rules to ensure that they are configured to block slow port scans and other suspicious activity.
-* Conduct a network scan to identify any potential vulnerabilities or open ports that may have been exploited by the malicious actor.
-* Review system logs to identify any potential indicators of compromise (IOCs) or suspicious activity.
-* Notify relevant teams to ensure that they are aware of the incident and can take necessary actions.
+* Block the IP address `45.33.32.156` from accessing the network to prevent further scanning activities.
+* Update the firewall rules to ensure that they are configured to block slow port scans and other suspicious traffic patterns.
+* Conduct a network scan to identify any potential vulnerabilities or open ports that may have been exploited by the attacker.
+* Review system logs to identify any potential indicators of compromise (IOCs) or suspicious activity that may have occurred as a result of the slow port scan.
+* Use the "web_search" tool to gather information on the MITRE ATT&CK framework's recommended actions for similar incidents.
 
-### Recommended Actions from MITRE ATT&CK Framework
+### MITRE ATT&CK Framework Recommendations
 
-* Implement a network-based intrusion detection system (NIDS) to detect and prevent slow port scans and other suspicious activity.
-* Implement a host-based intrusion detection system (HIDS) to detect and prevent malicious activity on individual hosts.
-* Conduct regular vulnerability assessments to identify potential vulnerabilities that can be exploited by malicious actors.
-* Implement a web application firewall (WAF) to protect web applications from common web attacks, including slow port scans.
-* Implement a security information and event management (SIEM) system to collect and analyze log data from various sources to identify potential security threats.
+* Implement network segmentation to limit the spread of potential malware or unauthorized access in the event of a successful attack.
+* Implement a host-based intrusion detection system (HIDS) to monitor system calls and detect potential malicious activity.
+* Implement a network-based intrusion detection system (NIDS) to monitor network traffic and detect potential malicious activity.
+* Conduct a vulnerability assessment to identify potential vulnerabilities that may have been exploited by the attacker.
+* Implement a security information and event management (SIEM) system to collect and analyze security-related data from various sources.
 
 ### Additional Recommendations
 
-* Review and update incident response policies to ensure that they are aligned with the latest security best practices and regulations.
-* Conduct regular security awareness training to educate employees on the latest security threats and best practices.
-* Implement a security orchestration, automation, and response (SOAR) system to automate and streamline incident response processes, reducing the time and effort required to respond to security incidents.
+* Review and update security policies to ensure that they are aligned with the latest security best practices and regulations.
+* Conduct a security awareness training for employees to educate them on the risks associated with slow port scans and other types of attacks.
+* Implement an incident response plan to ensure that the organization is prepared to respond to future incidents in a timely and effective manner.
 
 **Appendices**
 --------------
 
-* Raw Logs: Provided
-* Screenshot of Incident: N/A
-* Witness Statements: N/A
-* Network Diagrams: N/A
+* Raw logs:
+	+ Firewall logs
+* Screenshots:
+	+ None
+* Witness statements:
+	+ None
+* Network diagrams:
+	+ None
