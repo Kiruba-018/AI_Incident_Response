@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from langgraph.graph import END, START, StateGraph
 
-from .nodes import (
+from src.agent.nodes import (
     classify_ip,
     collect_evidence,
     collect_features,
@@ -23,7 +23,7 @@ from .nodes import (
     should_continue,
     summarize_incident,
 )
-from .states import State
+from src.agent.states import State
 
 load_dotenv()
 

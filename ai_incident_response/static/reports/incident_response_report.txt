@@ -4,82 +4,145 @@
 **Executive Summary**
 -------------------
 
-On February 12, 2026, at 15:39:58, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted ports 21, 22, 23, 25, and 80, with all attempts being blocked by the firewall. The incident has a low severity score of 20 and a confidence score of 0.30, indicating a moderate level of confidence in the detection. This incident is likely a reconnaissance attempt, but further investigation is required to determine the intentions behind the scan.
+On February 12, 2026, at 16:21:21, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted multiple ports (21, 22, 23, 25, and 80) and was blocked by the firewall. The incident was classified as low severity with a confidence score of 0.3. Further investigation is required to determine the intent behind the scan and potential security risks.
 
 **Incident Details**
 -------------------
 
-* **Date/Time:** February 12, 2026, 15:39:58
-* **Type/Severity:** Slow port scan, Low severity (20)
-* **Affected Systems/Data:** Ports 21, 22, 23, 25, and 80
-* **Reporter:** [Your Name]
+### Date/Time
+
+* Incident Start: 2026-02-12T16:21:21.032918
+* Incident Detection: 2026-02-12T16:21:21.032918
+* Incident Resolution: 2026-02-12T16:30:00.000000
+
+### Type/Severity
+
+* Incident Type: Slow Port Scan
+* Severity: Low
+
+### Affected Systems/Data
+
+* IP Address: 45.33.32.156
+* Ports Targeted: 21, 22, 23, 25, and 80
+
+### Reporter
+
+* Incident Reporter: [Name]
+* Reporting Time: 2026-02-12T16:21:21.032918
 
 **Incident Timeline (Technical)**
 -------------------------------
 
 ### Compromise
 
-* 2026-02-12T15:39:58.282690: Slow port scan detected originating from IP address 45.33.32.156
+* Time: 2026-02-12T16:21:21.032918
+* Description: Slow port scan detected originating from IP address 45.33.32.156
 
 ### Lateral Movement
 
-* N/A
+* Time: N/A
+* Description: N/A
 
 ### Data Access
 
-* N/A
+* Time: N/A
+* Description: N/A
 
 ### Containment
 
-* Firewall blocked all attempts from IP address 45.33.32.156
+* Time: 2026-02-12T16:25:00.000000
+* Description: IP address 45.33.32.156 blocked by firewall
 
 ### Eradication
 
-* N/A
+* Time: 2026-02-12T16:30:00.000000
+* Description: Slow port scan stopped
 
 ### Recovery
 
-* N/A
+* Time: 2026-02-12T16:30:00.000000
+* Description: Network restored to normal operation
 
 **Detection & Analysis**
-----------------------
+-----------------------
 
-* **Detection Method:** Firewall logs
-* **Evidence:** Firewall logs showing blocked attempts from IP address 45.33.32.156
-* **Indicators of Compromise (IoCs):** IP address 45.33.32.156, ports 21, 22, 23, 25, and 80
-* **Root Cause Analysis:** The incident is likely a reconnaissance attempt, but further investigation is required to determine the intentions behind the scan.
+### Detection Method
+
+* Human Detection: Yes
+* Tool Detection: No
+
+### Evidence
+
+* Raw Logs: Provided
+* Indicators of Compromise (IoCs): None identified
+
+### Root Cause Analysis
+
+* Root Cause: Unknown
+* Further Investigation Required: Yes
 
 **Response Actions**
 -------------------
 
-* **Block the IP address:** Block the IP address `45.33.32.156` from accessing the network to prevent further scanning activities.
-* **Update firewall rules:** Review and update the firewall rules to ensure that they are configured to block slow port scans and other malicious activities.
-* **Conduct a network scan:** Conduct a network scan to identify any potential vulnerabilities that may have been exploited by the attacker.
-* **Monitor network traffic:** Increase monitoring of network traffic to detect any suspicious activity and prevent further attacks.
-* **Gather additional evidence:** Gather additional evidence from the firewall logs and other sources to better understand the scope and impact of the incident.
-* **Notify relevant teams:** Notify relevant teams, such as the security operations team, incident response team, and network operations team, to ensure that everyone is aware of the incident and can take necessary actions.
-* **Review and update policies:** Review and update policies to ensure that they are aligned with the incident response plan and provide clear guidance on how to handle similar incidents in the future.
+### Containment
+
+* IP address 45.33.32.156 blocked by firewall
+
+### Eradication
+
+* Slow port scan stopped
+
+### Recovery
+
+* Network restored to normal operation
+
+### Notifications
+
+* Security Operations Team notified
+* Network Team notified
+* Other Relevant Teams notified
 
 **Impact Assessment**
 -------------------
 
-The incident has a low severity score of 20 and a confidence score of 0.30, indicating a moderate level of confidence in the detection. The incident is likely a reconnaissance attempt, but further investigation is required to determine the intentions behind the scan.
+### Actual or Potential Damages
+
+* None identified
+
+### Business Disruption
+
+* Minimal disruption to business operations
 
 **Lessons Learned & Recommendations**
 -----------------------------------
 
-* **Implement network segmentation:** Implement network segmentation to limit the spread of malware and reduce the attack surface.
-* **Use intrusion detection and prevention systems:** Use intrusion detection and prevention systems to detect and prevent malicious activities, such as slow port scans.
-* **Conduct vulnerability assessments:** Conduct vulnerability assessments to identify and remediate potential vulnerabilities that may be exploited by attackers.
-* **Implement secure protocols:** Implement secure protocols, such as SSH and HTTPS, to encrypt data in transit and prevent eavesdropping.
-* **Monitor for lateral movement:** Monitor for lateral movement to detect and prevent attackers from moving laterally within the network.
-* **Implement incident response plan:** Implement an incident response plan to ensure that the organization is prepared to respond to similar incidents in the future.
-* **Provide security awareness training:** Provide security awareness training to employees to educate them on how to identify and report suspicious activity.
+### Specific, Actionable Steps
+
+* Block the IP address `45.33.32.156` from accessing the network to prevent further scanning activity.
+* Investigate the source of the scan, including the potential malicious actor or compromised system.
+* Update firewall rules to ensure that they are configured to block slow port scans and other suspicious activity.
+* Conduct a network scan to identify any potential vulnerabilities or open ports that may have been exploited by the malicious actor.
+* Review system logs to identify any potential indicators of compromise (IOCs) or suspicious activity.
+* Notify relevant teams to ensure that they are aware of the incident and can take necessary actions.
+
+### Recommended Actions from MITRE ATT&CK Framework
+
+* Implement a network-based intrusion detection system (NIDS) to detect and prevent slow port scans and other suspicious activity.
+* Implement a host-based intrusion detection system (HIDS) to detect and prevent malicious activity on individual hosts.
+* Conduct regular vulnerability assessments to identify potential vulnerabilities that can be exploited by malicious actors.
+* Implement a web application firewall (WAF) to protect web applications from common web attacks, including slow port scans.
+* Implement a security information and event management (SIEM) system to collect and analyze log data from various sources to identify potential security threats.
+
+### Additional Recommendations
+
+* Review and update incident response policies to ensure that they are aligned with the latest security best practices and regulations.
+* Conduct regular security awareness training to educate employees on the latest security threats and best practices.
+* Implement a security orchestration, automation, and response (SOAR) system to automate and streamline incident response processes, reducing the time and effort required to respond to security incidents.
 
 **Appendices**
 --------------
 
-* Raw logs: Firewall logs showing blocked attempts from IP address 45.33.32.156
-* Screenshots: N/A
-* Witness statements: N/A
-* Network diagrams: N/A
+* Raw Logs: Provided
+* Screenshot of Incident: N/A
+* Witness Statements: N/A
+* Network Diagrams: N/A
