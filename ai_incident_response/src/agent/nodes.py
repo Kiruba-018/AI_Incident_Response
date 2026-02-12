@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 from src.agent.llm import invoke_llm
 from src.agent.rag import retrieve_soc_policy
-from src.agent.states import Incident_Details
+from src.agent.states import Incident_Details, Ip_Findings
 from src.agent.utils import serialize_for_json, supply_logs
 
 load_dotenv()
@@ -252,26 +252,33 @@ def collect_scanner_ip(state):
 def collect_evidence(state):
     """Collect evidence logs for the detected scanner IPs."""
     state.current_step = "collect_evidence"
-    evidence_list = []
-
     if state.incident_details is None:
-        state.incident_details = Incident_Details()
+        state.incident_details = Incident_Details(
+            incident_type="Slow port scan detected",
+            time_of_incident=datetime.now().isoformat()
+        )
+
 
     for ip in state.scanner_ips:
+
         evidence_logs = [log for log in recent_logs if ip in log][:5]
 
-        evidence_list.append(
-            {                
-                "ip_address" : ip,
-                "scan_type" : "slow port scan",
-                "windows_detected" : state.suspicious_ip[ip]["windows"],
-                "sensitive_ports_accessed" : state.suspicious_ip[ip]["sensitive_port_count"],
-                "evidence_logs" : ";\n".join(evidence_logs)
-            }
+        finding = Ip_Findings(
+            severity_score=0,
+            severity_level="Low",
+            confidence_score=0.0,
+            evidence_list=[
+                {
+                    "scan_type": "slow port scan",
+                    "windows_detected": state.suspicious_ip[ip]["windows"],
+                    "sensitive_ports_accessed": state.suspicious_ip[ip]["sensitive_port_count"],
+                    "raw_logs": evidence_logs
+                }
+            ]
         )
-    
-    state.incident_details.evidence = evidence_list
-    
+
+        state.incident_details.ip_findings[ip] = finding
+
     return state
 
 
@@ -316,6 +323,17 @@ def set_severity(state):
     
     return state
 
+
+def calculate_confidence(state):
+    """ Calculate confidence score for the incident classification based on evidence and severity."""
+
+    state.current_step = "calculate_confidence"
+
+    if state.incident_details is None:
+        return state
+    
+    score = 0.0
+    
 
 
 
