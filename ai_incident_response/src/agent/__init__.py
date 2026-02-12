@@ -1,5 +1,5 @@
 """AI Incident Response Agent Package."""
 
-from src.agent.graph import graph
+from .graph import graph, run_graph
 
-__all__ = ["graph"]
+__all__ = ["graph", "run_graph"]

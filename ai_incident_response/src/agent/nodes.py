@@ -332,7 +332,7 @@ def calculate_confidence(windows, syn, fin, sensitive):
     ((syn + fin) * 0.05) +
     (0.1 if sensitive > 0 else 0),
     1.0)
-    return f"{confidence:.2f}"
+    return float(f"{confidence:.2f}")
     
 
 
