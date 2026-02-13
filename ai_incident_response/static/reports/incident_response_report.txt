@@ -4,16 +4,16 @@
 **Executive Summary**
 -------------------
 
-On February 12, 2026, at 16:27:48, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted multiple ports, including 21, 22, 23, 25, and 80, with a low severity score of 20 and a confidence score of 0.3. The scan was blocked by the firewall, indicating a potential reconnaissance activity. Further investigation is required to determine the intent and potential impact of this incident.
+On February 12, 2026, at 17:04:24, a slow port scan was detected originating from IP address 45.33.32.156. The scan targeted multiple ports, including 21, 22, 23, 25, and 80, with a low confidence score of 0.3 and a severity level of 'Low'. The scan was blocked by the firewall, and the incident has been logged. Further investigation is recommended to determine the potential threat and assess any potential risks.
 
 **Incident Details**
 -------------------
 
 ### Date/Time
 
-* Incident Start: 2026-02-12T16:27:48.184980
-* Incident Detection: 2026-02-12T16:27:48.184980
-* Incident Resolution: 2026-02-12T16:30:00 ( containment and eradication completed)
+* Incident Start: 2026-02-12T17:04:24.188815
+* Incident Detected: 2026-02-12T17:04:24.188815
+* Incident Resolved: 2026-02-12T17:05:00 (immediately after detection)
 
 ### Type/Severity
 
@@ -23,135 +23,86 @@ On February 12, 2026, at 16:27:48, a slow port scan was detected originating fro
 ### Affected Systems/Data
 
 * IP Address: 45.33.32.156
+* Ports Targeted: 21, 22, 23, 25, 80
 
 ### Reporter
 
-* Incident Reporter: [Name]
+* Incident Reporter: [Your Name]
 
 **Incident Timeline (Technical)**
 --------------------------------
 
-### Compromise
-
-* Time: 2026-02-12T16:27:48.184980
-* Description: Slow port scan detected originating from IP address 45.33.32.156
-
-### Lateral Movement
-
-* Time: N/A
-* Description: No lateral movement detected
-
-### Data Access
-
-* Time: N/A
-* Description: No data access detected
-
-### Containment
-
-* Time: 2026-02-12T16:30:00
-* Description: IP address 45.33.32.156 blocked by firewall
-
-### Eradication
-
-* Time: 2026-02-12T16:30:00
-* Description: Slow port scan eradicated
-
-### Recovery
-
-* Time: 2026-02-12T16:30:00
-* Description: System recovered
+1. **Compromise**: 2026-02-12T17:04:24.188815 - Slow port scan detected originating from IP address 45.33.32.156.
+2. **Lateral Movement**: N/A
+3. **Data Access**: N/A
+4. **Containment**: 2026-02-12T17:04:24.188815 - Firewall blocked the scan.
+5. **Eradication**: 2026-02-12T17:05:00 - Incident logged and further investigation recommended.
+6. **Recovery**: N/A
 
 **Detection & Analysis**
--------------------------
+------------------------
 
-### Detection Method
-
-* Human detection using firewall logs
-
-### Evidence
-
-* Firewall logs:
-	+ 2026-01-05T10:00:10 FIREWALL src_ip=45.33.32.156 dest_port=21 protocol=TCP tcp_flags=SYN action=BLOCKED
-	+ 2026-01-05T10:00:35 FIREWALL src_ip=45.33.32.156 dest_port=22 protocol=TCP tcp_flags=FIN action=BLOCKED
-	+ 2026-01-05T10:01:00 FIREWALL src_ip=45.33.32.156 dest_port=23 protocol=TCP tcp_flags=SYN action=BLOCKED
-	+ 2026-01-05T10:01:25 FIREWALL src_ip=45.33.32.156 dest_port=25 protocol=TCP tcp_flags=FIN action=BLOCKED
-	+ 2026-01-05T10:01:50 FIREWALL src_ip=45.33.32.156 dest_port=80 protocol=TCP tcp_flags=SYN action=BLOCKED
-
-### Indicators of Compromise (IoCs)
-
-* IP address 45.33.32.156
-
-### Root Cause Analysis
-
-* Slow port scan detected originating from IP address 45.33.32.156
+* **Detection Method**: Firewall logs
+* **Evidence**: Firewall logs showing blocked scans
+* **Indicators of Compromise (IoCs)**: IP address 45.33.32.156, ports 21, 22, 23, 25, 80
+* **Root Cause Analysis**: Further investigation is recommended to determine the potential threat and assess any potential risks.
 
 **Response Actions**
----------------------
+-------------------
 
 ### Containment
 
-* IP address 45.33.32.156 blocked by firewall
+* Firewall blocked the scan.
 
 ### Eradication
 
-* Slow port scan eradicated
+* Incident logged and further investigation recommended.
 
 ### Recovery
 
-* System recovered
+* N/A
 
 ### Notifications
 
-* Incident reported to management and security team
-
-### Effectiveness
-
-* Incident contained and eradicated
+* Incident reported to management and security team.
 
 **Impact Assessment**
 ---------------------
 
-### Actual or Potential Damages
-
-* No actual or potential damages detected
-
-### Injuries or Business Disruption
-
-* No injuries or business disruption detected
+* **Actual Impact**: Low
+* **Potential Impact**: Unknown
 
 **Lessons Learned & Recommendations**
 --------------------------------------
 
 ### Incident Response Recommendations
 
-* Block the IP address `45.33.32.156` from accessing the network to prevent further scanning activities.
-* Update the firewall rules to ensure that they are configured to block slow port scans and other suspicious traffic patterns.
-* Conduct a network scan to identify any potential vulnerabilities or open ports that may have been exploited by the attacker.
-* Review system logs to identify any potential indicators of compromise (IOCs) or suspicious activity that may have occurred as a result of the slow port scan.
-* Use the "web_search" tool to gather information on the MITRE ATT&CK framework's recommended actions for similar incidents.
+* **Block the IP address**: Immediately block the IP address `45.33.32.156` from accessing the network to prevent further malicious activity.
+* **Investigate the IP address**: Use threat intelligence tools to gather information about the IP address `45.33.32.156`, including its geolocation, ASN, and any known malicious activity associated with it.
+* **Review firewall logs**: Review the firewall logs to identify any other suspicious activity related to the IP address `45.33.32.156` and take necessary actions to block or restrict access.
+* **Update firewall rules**: Update the firewall rules to block any future traffic from the IP address `45.33.32.156` and consider implementing a rate limiting policy to prevent similar slow port scans.
+* **Conduct a network scan**: Conduct a network scan to identify any open ports or services that may be vulnerable to exploitation.
+* **Implement a vulnerability management program**: Implement a vulnerability management program to identify and remediate any vulnerabilities in the network, including those that may be exploited by slow port scans.
+* **Use threat intelligence feeds**: Utilize threat intelligence feeds to stay informed about known malicious IP addresses and block them accordingly.
 
 ### MITRE ATT&CK Framework Recommendations
 
-* Implement network segmentation to limit the spread of potential malware or unauthorized access in the event of a successful attack.
-* Implement a host-based intrusion detection system (HIDS) to monitor system calls and detect potential malicious activity.
-* Implement a network-based intrusion detection system (NIDS) to monitor network traffic and detect potential malicious activity.
-* Conduct a vulnerability assessment to identify potential vulnerabilities that may have been exploited by the attacker.
-* Implement a security information and event management (SIEM) system to collect and analyze security-related data from various sources.
+* **Implement a network traffic monitoring system**: Implement a network traffic monitoring system to detect and alert on suspicious activity, including slow port scans.
+* **Use intrusion detection and prevention systems**: Use intrusion detection and prevention systems to detect and block malicious traffic, including slow port scans.
+* **Implement a security information and event management (SIEM) system**: Implement a SIEM system to collect and analyze security-related data from various sources, including firewall logs, to identify potential security incidents.
+* **Conduct regular security awareness training**: Conduct regular security awareness training for employees to educate them on the risks associated with slow port scans and other types of malicious activity.
+* **Implement a incident response plan**: Implement a incident response plan to ensure that the organization is prepared to respond to security incidents, including slow port scans.
 
-### Additional Recommendations
+### Policy Mapping
 
-* Review and update security policies to ensure that they are aligned with the latest security best practices and regulations.
-* Conduct a security awareness training for employees to educate them on the risks associated with slow port scans and other types of attacks.
-* Implement an incident response plan to ensure that the organization is prepared to respond to future incidents in a timely and effective manner.
+* **Update the firewall policy**: Update the firewall policy to block traffic from known malicious IP addresses, including `45.33.32.156`.
+* **Update the vulnerability management policy**: Update the vulnerability management policy to include regular network scans and vulnerability remediation.
+* **Update the incident response policy**: Update the incident response policy to include procedures for responding to slow port scans and other types of malicious activity.
 
 **Appendices**
 --------------
 
-* Raw logs:
-	+ Firewall logs
-* Screenshots:
-	+ None
-* Witness statements:
-	+ None
-* Network diagrams:
-	+ None
+* Raw logs: Firewall logs showing blocked scans
+* Screenshots: N/A
+* Witness statements: N/A
+* Network diagrams: N/A

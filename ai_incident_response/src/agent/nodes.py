@@ -29,19 +29,13 @@ INCIDENT_RECORD_FILE = BASE_DIR / "static" / "incident_records" / "incidents.jso
 REPORT_FILE = BASE_DIR / "static" / "reports" / "incident_response_report.txt"
 
 
-
-
 # To keep track of recent logs for context
 recent_logs = deque(maxlen=1000)
 log_iterator = None
 read_all_logs = False
 
 
-
-
 # --- Nodes ---
-
-
 def get_logs(state):
     """Retrieve logs in time windows and update state."""
     state.current_step = "get_logs"
@@ -114,11 +108,9 @@ def parse_logs(state):
 
         parsed_logs.append(parsed_log)
     
-    state.current_logs = {"parsed_logs": parsed_logs}
-    
-
-    
+    state.current_logs = {"parsed_logs": parsed_logs}    
     return state
+
 
 def collect_features(state):
     """Collect features from parsed logs for IP behavior analysis."""
